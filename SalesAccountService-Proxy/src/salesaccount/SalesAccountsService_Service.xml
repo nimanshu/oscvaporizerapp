@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle-webservice-clients xmlns:ns2="http://java.sun.com/xml/ns/javaee">
+   <webservice-client>
+      <service-qname localpart="SalesAccountsService"
+                     namespaceURI="http://xmlns.oracle.com/apps/crmCommon/salesParties/salesPartiesService/"/>
+      <port-info>
+         <wsdl-port localpart="SalesAccountsServiceSoapHttpPort"
+                    namespaceURI="http://xmlns.oracle.com/apps/crmCommon/salesParties/salesPartiesService/"/>
+         <runtime/>
+         <policy-references>
+            <policy-reference uri="oracle/wss_username_token_over_ssl_client_policy"
+                              category="security"/>
+         </policy-references>
+         <operations>
+            <operation name="getSalesAccount"/>
+            <operation name="createSalesAccount"/>
+            <operation name="updateSalesAccount"/>
+            <operation name="mergeSalesAccount"/>
+            <operation name="findSalesAccount"/>
+            <operation name="getSalesAccountTerritory"/>
+            <operation name="createSalesAccountTerritory"/>
+            <operation name="updateSalesAccountTerritory"/>
+            <operation name="deleteSalesAccountTerritory"/>
+            <operation name="mergeSalesAccountTerritory"/>
+            <operation name="findSalesAccountTerritory"/>
+            <operation name="getSalesAccountContacts"/>
+            <operation name="createSalesAccountContacts"/>
+            <operation name="updateSalesAccountContacts"/>
+            <operation name="deleteSalesAccountContacts"/>
+            <operation name="mergeSalesAccountContacts"/>
+            <operation name="findSalesAccountContacts"/>
+            <operation name="updateSalesAccountTerritoryAsync"/>
+            <operation name="createSalesAccountAsync"/>
+            <operation name="updateSalesAccountAsync"/>
+            <operation name="deleteSalesAccountContactsAsync"/>
+            <operation name="findSalesAccountTerritoryAsync"/>
+            <operation name="getSalesAccountContactsAsync"/>
+            <operation name="mergeSalesAccountAsync"/>
+            <operation name="mergeSalesAccountTerritoryAsync"/>
+            <operation name="getSalesAccountTerritoryAsync"/>
+            <operation name="mergeSalesAccountContactsAsync"/>
+            <operation name="createSalesAccountTerritoryAsync"/>
+            <operation name="createSalesAccountContactsAsync"/>
+            <operation name="deleteSalesAccountTerritoryAsync"/>
+            <operation name="findSalesAccountContactsAsync"/>
+            <operation name="updateSalesAccountContactsAsync"/>
+            <operation name="getSalesAccountAsync"/>
+            <operation name="findSalesAccountAsync"/>
+            <operation name="deleteSalesAccount"/>
+            <operation name="deleteSalesAccountAsync"/>
+            <operation name="getSalesAccountContactPoints"/>
+            <operation name="createSalesAccountContactPoints"/>
+            <operation name="updateSalesAccountContactPoints"/>
+            <operation name="deleteSalesAccountContactPoints"/>
+            <operation name="mergeSalesAccountContactPoints"/>
+            <operation name="findSalesAccountContactPoints"/>
+            <operation name="updateSalesAccountContactPointsAsync"/>
+            <operation name="mergeSalesAccountContactPointsAsync"/>
+            <operation name="getSalesAccountContactPointsAsync"/>
+            <operation name="deleteSalesAccountContactPointsAsync"/>
+            <operation name="findSalesAccountContactPointsAsync"/>
+            <operation name="createSalesAccountContactPointsAsync"/>
+            <operation name="findAccountsOfParty"/>
+            <operation name="findAccountsOfPartyAsync"/>
+            <operation name="getDfltObjAttrHints"/>
+            <operation name="getServiceLastUpdateTime"/>
+            <operation name="getEntityList"/>
+            <operation name="getDfltObjAttrHintsAsync"/>
+            <operation name="getEntityListAsync"/>
+            <operation name="getServiceLastUpdateTimeAsync"/>
+         </operations>
+      </port-info>
+   </webservice-client>
+</oracle-webservice-clients>

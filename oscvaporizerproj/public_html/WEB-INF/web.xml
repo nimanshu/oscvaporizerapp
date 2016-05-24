@@ -1,0 +1,44 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+         
+         <servlet>
+            <servlet-name>testServlet</servlet-name>
+            <servlet-class>com.deloitte.vaporizer.jcs.controller.testServlet</servlet-class>
+        </servlet>
+   
+    <servlet-mapping>
+                <servlet-name>testServlet</servlet-name>
+                <url-pattern>/testservlet</url-pattern>
+        </servlet-mapping>
+        
+        <servlet>
+            <servlet-name>ProjectServlet</servlet-name>
+            <servlet-class>com.deloitte.vaporizer.jcs.controller.ProjectServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>ProjectServlet</servlet-name>
+            <url-pattern>/projectservlet</url-pattern>
+        </servlet-mapping>
+    
+        <servlet>
+            <servlet-name>GetSiebelObjectsList</servlet-name>
+            <servlet-class>com.deloitte.vaporizer.jcs.controller.GetSiebelObjectsList</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>GetSiebelObjectsList</servlet-name>
+            <url-pattern>/getsiebelobjectslist</url-pattern>
+        </servlet-mapping>
+        
+        
+         <servlet>
+            <servlet-name>GetOscObjectsList</servlet-name>
+            <servlet-class>com.deloitte.vaporizer.jcs.controller.GetOscObjectsList</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>GetOscObjectsList</servlet-name>
+            <url-pattern>/getoscobjectslist</url-pattern>
+        </servlet-mapping>
+    <login-config />
+</web-app>

@@ -1,0 +1,82 @@
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/crmCommon/salesParties/salesPartiesService/"
+     sdoJava:package="oracle.apps.crmCommon.salesParties.salesPartiesService" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml" xmlns="http://xmlns.oracle.com/apps/crmCommon/salesParties/salesPartiesService/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <name>Sales Account Territory</name>
+            <description>An object representing sales account territory attributes for territory assigned to the sales account.</description>
+            <oer:attributes xmlns:oer="http://xmlns.oracle.com/oer">
+                <oer:attribute description="The date on which the record is last updated." name="LastUpdateDate"
+                     xmlns:oer="http://xmlns.oracle.com/oer"/>
+                <oer:attribute description="The user login for the user who last updated the record."
+                     name="LastUpdateLogin" xmlns:oer="http://xmlns.oracle.com/oer"/>
+                <oer:attribute description="The user who last updated the record." name="LastUpdatedBy"
+                     xmlns:oer="http://xmlns.oracle.com/oer"/>
+                <oer:attribute description="The number to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber" xmlns:oer="http://xmlns.oracle.com/oer"/>
+                <oer:attribute description="The sales account territory identifier." name="SAccountTerritoryId"
+                     xmlns:oer="http://xmlns.oracle.com/oer"/>
+                <oer:attribute description="The sales account identifier." name="SalesAccountId" xmlns:oer="http://xmlns.oracle.com/oer"/>
+                <oer:attribute description="The territory identifier." name="TerritoryId" xmlns:oer="http://xmlns.oracle.com/oer"/>
+                <oer:attribute description="The territory version identifier." name="TerritoryVersionId"
+                     xmlns:oer="http://xmlns.oracle.com/oer"/>
+                <oer:attribute description="The date and time of the last update from mobile." name="UserLastUpdateDate"
+                     xmlns:oer="http://xmlns.oracle.com/oer"/>
+                <oer:attribute description="The territory name." name="Name" xmlns:oer="http://xmlns.oracle.com/oer"/>
+                <oer:attribute description="The sales account party name" name="PartyName" xmlns:oer="http://xmlns.oracle.com/oer"/>
+                <oer:attribute description="The identifier of the party." name="PartyId" xmlns:oer="http://xmlns.oracle.com/oer"/>
+                <oer:attribute description="The type code of the sales account territory." name="TypeCode"
+                     xmlns:oer="http://xmlns.oracle.com/oer"/>
+                <oer:attribute description="The status code of sales account territory." name="StatusCode"
+                     xmlns:oer="http://xmlns.oracle.com/oer"/>
+                <oer:attribute description="Indicates date on which the association of territory to sales account is created."
+                     name="StartDateActive" xmlns:oer="http://xmlns.oracle.com/oer"/>
+                <oer:attribute description="Indicates date on which the association of territory to sales account is ended."
+                     name="EndDateActive" xmlns:oer="http://xmlns.oracle.com/oer"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+    <xsd:complexType name="SalesAccountTerritory" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <xsd:annotation xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>SAccountTerritoryId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:element minOccurs="0" name="LastUpdateDate" type="ns0:dateTime-Timestamp" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="LastUpdateLogin" nillable="true" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="LastUpdatedBy" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"
+                 xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="SAccountTerritoryId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"
+                 xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="SalesAccountId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"
+                 xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="TerritoryId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"
+                 xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="TerritoryVersionId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"
+                 xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="UserLastUpdateDate" nillable="true" type="ns0:dateTime-Timestamp"
+                 xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="Name" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="PartyName" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="PartyId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"
+                 xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="TypeCode" nillable="true" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="StatusCode" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="StartDateActive" nillable="true" type="ns0:date-Date" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="EndDateActive" nillable="true" type="ns0:date-Date" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="AccountStatus_c" nillable="true" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="ContractState_c" nillable="true" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+            <xsd:element minOccurs="0" name="Enrollment_c" nillable="true" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="salesAccountTerritory" type="SalesAccountTerritory" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+</xsd:schema>
