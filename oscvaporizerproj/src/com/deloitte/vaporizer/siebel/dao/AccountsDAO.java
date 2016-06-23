@@ -1,5 +1,6 @@
 package com.deloitte.vaporizer.siebel.dao;
 
+import com.deloitte.vaporizer.siebel.bean.SeibelDataBO;
 import com.deloitte.vaporizer.siebel.bean.SiebelAccount;
 import com.deloitte.vaporizer.siebel.bean.SiebelAccountDynamic;
 import com.deloitte.vaporizer.siebel.util.SiebelDBConnectionManager;
@@ -15,9 +16,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//import com.deloitte.vaporizer.jcs.util.ExcelGenerator;
+
+import java.io.IOException;
+
 public class AccountsDAO 
     {
-        public ArrayList<SiebelAccount> getSiebelAccounts() throws SQLException 
+        //public ArrayList<SiebelAccount> getSiebelAccounts() throws SQLException 
+        public SeibelDataBO getSiebelAccounts() throws SQLException 
         {
             Connection con = SiebelDBConnectionManager.getSiebelConnection();
             ArrayList<SiebelAccount> accList = null;
@@ -38,60 +44,50 @@ public class AccountsDAO
               
               ResultSetMetaData rsmd = rs.getMetaData();
               int colCount = rsmd.getColumnCount();
-              
+              System.out.println("colCount = "+colCount);
               int curColCount = 1;
               
               
-              Map<Integer, List<String>> map1 = new HashMap<Integer, List<String>>();
-              Map<Integer, String> map2 = new HashMap<Integer, String>();
+              //Map<Integer, List<String>> map1 = new HashMap<Integer, List<String>>();
+              //Map<Integer, String> map2 = new HashMap<Integer, String>();
+              HashMap<String, ArrayList<String>> map1 = new HashMap<String, ArrayList<String>>();
                 
-                for(curColCount = 1; curColCount<colCount; curColCount++)
+                for(curColCount = 1; curColCount<=colCount; curColCount++)
                 {
-                    List<String> arlst = new ArrayList<String>();
-                    map1.put(curColCount, arlst);
-                    map2.put(curColCount, rsmd.getColumnLabel(curColCount));
+                    System.out.println("rsmd.getColumnLabel(curColCount) = "+rsmd.getColumnLabel(curColCount));
+                    ArrayList<String> arlst = new ArrayList<String>();
+                    map1.put(rsmd.getColumnLabel(curColCount), arlst);
+                    //map2.put(curColCount, rsmd.getColumnLabel(curColCount));
                 }
                 
                 
                 while(rs.next())
                 {
-                    for(curColCount = 1; curColCount<colCount; curColCount++)
+                    for(curColCount = 1; curColCount<=colCount; curColCount++)
                     {
                         System.out.println("rownum = "+rs.getRow() + "col = "+curColCount+ " data = " +rs.getString(curColCount));
-                        List<String> stringList = map1.get(curColCount);
+                        ArrayList<String> stringList = map1.get(rsmd.getColumnLabel(curColCount));
                         stringList.add(rs.getString(curColCount));
                     }   
-                    
-//                    SiebelAccount acc = new SiebelAccount();
-//                    String accountName = mySet.getString(1);
-//                    String accountStatus = mySet.getString(2);
-//                    String accountType = mySet.getString(3);
-//                    String accountStreetAddress1 = mySet.getString(4);
-//                    String accountStreetAddress2 = mySet.getString(5);
-//                    String accountStreetAddress3 = mySet.getString(6);
-//                    String city = mySet.getString(7);
-//                    String state = mySet.getString(8);
-//                    String zipCode = mySet.getString(9);
-//                    
-//                    acc.setAccountName(accountName);
-//                    acc.setAccountStatus(accountStatus);
-//                    acc.setAccountStreetAddress1(accountStreetAddress1);
-//                    acc.setAccountStreetAddress2(accountStreetAddress2);
-//                    acc.setAccountStreetAddress3(accountStreetAddress3);
-//                    acc.setAccountType(accountType);
-//                    acc.setCity(city);
-//                    acc.setState(state);
-//                    acc.setZipCode(zipCode);
-//                    accList.add(acc);
-                    
-                }
-                
-            SiebelAccountDynamic siebBean = new SiebelAccountDynamic(map1,map2);
-            
+                 
+            SeibelDataBO siebBean = new SeibelDataBO();
+            siebBean.setObjSeibelData(map1);
                 
                 
                 SiebelDBConnectionManager.closeConnection(con);
-                return accList;
+                
+              /*  ExcelGenerator exGen = new ExcelGenerator();
+
+                try {
+                    exGen.writeXLSXFile(siebBean,"");
+                } 
+                
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+                //return accList;*/
+                return siebBean;
+              }
               }
               else
               {
@@ -102,6 +98,6 @@ public class AccountsDAO
         
         public static void main(String [] args) throws SQLException {
             AccountsDAO accDAO = new AccountsDAO();
-            accDAO.getSiebelAccounts();    
+            accDAO.getSiebelAccounts();
         }
     }

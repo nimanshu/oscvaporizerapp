@@ -4,93 +4,73 @@
 <%@ include file="/header.jsp" %>
     <title>Create New Project</title>
     <body>
-    <header>
-    <center>
-        <img id="e" src="resources/images/AppHeader.png" alt="nothing" style="width:40%"/>
-    </center>
-    </header>
-    <br><br>
         <div class="container">
         <div class="row">
         <div class="col-sm-12">
+        
         <form action="projectservlet" method="POST" class="row col-sm-12">
-        <input type="submit" name="goHome" value="Home"  class="btn btn-primary"/>
-    </form>
-    <br>
+            <input type="submit" name="goHome" value="Home"  class="btn btn-primary"/>
+        </form>
+    <br><br>    <br><br>
+
     
-    <form name="test" action="projectservlet" method="post">
-        <table class="table table-striped table-hover">
-            <tr>
-                <td>
-                    <Label>PROJECT NAME: </Label>
-                </td>
-                <td>
-                    <input id="PROJECT_NAME" name="PROJECT_NAME"  />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <Label>SIEBEL USER NAME: </label>
-                </td>
-                <td>
-                    <input id="SIEBEL_USER_NAME" name="SIEBEL_USER_NAME"/>
-                 </td>   
-            </tr>
-            <tr>
-                <td>
-                    <Label>SIEBEL PASSWORD: </label>
-                </td>
-                <td>
-                    <input  id="SIEBEL_PASSWORD" name="SIEBEL_PASSWORD"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <Label>SIEBEL TOKEN: </label>
-                </td>
-                <td>
-                    <input  id="SIEBEL_TOKEN" name="SIEBEL_TOKEN"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <Label>SIEBEL REPOSITORY NAME: </label>
-                </td>
-                <td>
-                    <input  id="SIEBEL_REPO_NAME" name="SIEBEL_REPO_NAME"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <Label>OSC USER NAME: </label>
-                </td>
-                <td>
-                    <input  id="TG_SC_USERNAME" name="TG_SC_USERNAME"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <Label>OSC PASSWORD: </label>
-                </td>
-                <td>
-                    <input  id="TG_SC_PWD" name="TG_SC_PWD"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <Label>OSC HOST NAME: </label>
-                </td>
-                <td>
-                    <input  id="TG_SC_HOSTNAME" name="TG_SC_HOSTNAME"/>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align:center">
-                     <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
-                </td>
-             </tr>   
-                
-         </table>       
+        <form name="test" action="projectservlet" method="post">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="col-sm-4">
+                            <Label>Project Name: </Label>
+                    </div>
+                    <div class="col-sm-6">
+                            <input id="PROJECT_NAME" name="PROJECT_NAME" class="form-control" />
+                    </div>
+                    <div class="col-sm-4">
+                        <Label>Siebel User Name: </label>
+                   </div>
+                   <div class="col-sm-6">
+                        <input id="SIEBEL_USER_NAME" name="SIEBEL_USER_NAME" class="form-control"/>
+                     </div>
+                     <div class="col-sm-4">
+                        <Label>Siebel Password: </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input  id="SIEBEL_PASSWORD" name="SIEBEL_PASSWORD" class="form-control"/>
+                    </div>
+                    <div class="col-sm-4">
+                        <Label>Siebel Token: </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input  id="SIEBEL_TOKEN" name="SIEBEL_TOKEN" class="form-control"/>
+                    </div>
+                    
+                    <div class="col-sm-4">
+                        <Label>Siebel Repository Name: </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input  id="SIEBEL_REPO_NAME" name="SIEBEL_REPO_NAME" class="form-control"/>
+                    </div>
+                    <div class="col-sm-4">
+                        <Label>OSC User Name: </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input  id="TG_SC_USERNAME" name="TG_SC_USERNAME" class="form-control"/>
+                    </div>
+                    <div class="col-sm-4">
+                        <Label>OSC Password: </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input  id="TG_SC_PWD" name="TG_SC_PWD" class="form-control"/>
+                    </div>
+                    <div class="col-sm-4">
+                        <Label>OSC Host Name: </label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input  id="TG_SC_HOSTNAME" name="TG_SC_HOSTNAME" class="form-control"/>
+                    </div>
+                    <div class="col-sm-10 text-center"><br><br>
+                         <button type="submit" value="Submit" class="btn btn-success ">Submit</button>
+                    </div>
+                    </div>
+                </div>
             </form>
         </div>
         </div>

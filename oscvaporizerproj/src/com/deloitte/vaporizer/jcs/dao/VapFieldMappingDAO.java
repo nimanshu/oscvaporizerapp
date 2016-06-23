@@ -1,6 +1,7 @@
 package com.deloitte.vaporizer.jcs.dao;
 
 import com.deloitte.vaporizer.jcs.bean.VapFieldMapping;
+import com.deloitte.vaporizer.jcs.bean.VapPredefFieldMapping;
 import com.deloitte.vaporizer.jcs.util.GetJNDIConnectionUtil;
 
 import java.sql.Connection;
@@ -86,4 +87,47 @@ public class VapFieldMappingDAO
             stmt.close();
         }
     }
+    
+    public ArrayList<VapPredefFieldMapping> getPreDefObjMapRelatedFieldMappings(int objMapId) throws SQLException {
+        if(con != null)
+        {
+            System.out.println("con != null ");
+            ArrayList<VapPredefFieldMapping> fieldMapList = new ArrayList<VapPredefFieldMapping>();
+            String getPreDefObjMapRelatedFieldMappingsSql = "SELECT ID,PREDEF_OBJ_MAPPING_ID,SIEBEL_BASE_TABLE_NAME,SIEBEL_BASE_TABLE_COLUMN_NAME,OSC_OBJECT_NAME,OSC_OBJECT_FIELD_NAME,CREATED,CREATED_BY,LST_UPDATED,LST_UPDATED_BY\n" + 
+            "FROM \n" + 
+            "VAP_PREDEF_FIELD_MAPPING WHERE \n" + 
+            "PREDEF_OBJ_MAPPING_ID = '"+objMapId+"'";
+            System.out.println(getPreDefObjMapRelatedFieldMappingsSql);
+            stmt = con.createStatement();
+            ResultSet rs1 = stmt.executeQuery(getPreDefObjMapRelatedFieldMappingsSql);
+            //System.out.println(rs1.next());
+            while(rs1.next())
+            {
+                System.out.println("inside rs.next");
+                VapPredefFieldMapping fieldMap = new VapPredefFieldMapping();
+                fieldMap.setCreated(rs1.getDate("CREATED"));
+                fieldMap.setCreatedBy(rs1.getString("CREATED_BY"));
+                fieldMap.setId(rs1.getInt("ID"));
+                fieldMap.setLstUpdated(rs1.getDate("LST_UPDATED"));
+                fieldMap.setLstUpdatedBy(rs1.getString("LST_UPDATED_BY"));
+                fieldMap.setPredefObjMappingId(rs1.getInt("PREDEF_OBJ_MAPPING_ID"));
+                fieldMap.setSiebBaseTableName(rs1.getString("SIEBEL_BASE_TABLE_NAME"));
+                fieldMap.setSiebBaseTableColumnName(rs1.getString("SIEBEL_BASE_TABLE_COLUMN_NAME"));
+                fieldMap.setOscObjectName(rs1.getString("OSC_OBJECT_NAME"));
+                fieldMap.setOscObjectFieldName(rs1.getString("OSC_OBJECT_FIELD_NAME"));
+                fieldMapList.add(fieldMap);
+            }
+            stmt.close();
+            System.out.println("fieldMapList = "+fieldMapList);
+            return fieldMapList;
+        }
+        else 
+        {
+            System.out.println("con == null ");    
+            return null; 
+        }    
+        
+    }
+    
+    
 }

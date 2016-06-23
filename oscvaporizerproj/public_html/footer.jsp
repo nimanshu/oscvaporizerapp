@@ -7,6 +7,13 @@
  <script type="text/javascript" src="resources/DataTables/datatables.min.js"></script>
  <script type="text/javascript" src="resources/js/appjs.js"></script>
  <script type="text/javascript"  src="resources/bootstrap-3.3.6-dist/bootstrap-validator-master/js/validator.js"></script>
+ <script type="text/javascript">
+ $.extend( true, $.fn.dataTable.defaults, {
+        responsive: true,
+        bInfo: false,
+        bLengthChange: false
+    });
+ </script>
  <div class="loading-overlay hide" id="loading-overlay">
  <div class="spinner">
   <div class="rect1"></div>

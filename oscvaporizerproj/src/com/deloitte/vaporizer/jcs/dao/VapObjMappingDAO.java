@@ -84,7 +84,7 @@ public class VapObjMappingDAO
     
     
     
-    public void createObjectMapping(VapObjMapping objMap) throws SQLException {
+    public int createObjectMapping(VapObjMapping objMap) throws SQLException {
         
         int id = objMap.getId();
         int sequence = objMap.getSequence();
@@ -98,9 +98,22 @@ public class VapObjMappingDAO
         Date lstUpdated = new java.sql.Date(objMap.getLstUpdated().getTime());
         String lstUpdatedBy = objMap.getLstUpdatedBy();
                 
+                
+        String objMapNextValSql = "SELECT VAP_OBJ_MAPPING_SEQ.NEXTVAL from dual";
+        int objMapNextVal=0;  
+        if(con != null)
+        {
+            stmt = con.createStatement();
+            ResultSet rs1 = stmt.executeQuery(objMapNextValSql);
+            if(rs1.next()) {
+                objMapNextVal = rs1.getInt(1);    
+            }
+            stmt.close();
+        }  
+                
         String createObjMapSql = "INSERT INTO VAP_OBJ_MAPPING \n" + 
                    "(ID,SEQUENCE_NUM,OSC_OBJECT,SIEBEL_OBJECT,SIEBEL_PRIM_BASE_TABLE,PROJECT_ID,EXTRACTION_QUERY,CREATED,CREATED_BY,LST_UPDATED,LST_UPDATED_BY)\n" + 
-                   "VALUES (VAP_OBJ_MAPPING_SEQ.NEXTVAL, '"+sequence+"','"+oscObject+"','"+siebelObject+"','"+siebelPrimBaseTable+"','"+projectId+"','"+extractionQuery+"',TO_DATE('"+created+"','YYYY-MM-DD'),'"+createdBy+"',TO_DATE('"+lstUpdated+"','YYYY-MM-DD'),'"+lstUpdatedBy+"')";
+                   "VALUES ('"+objMapNextVal+"', '"+sequence+"','"+oscObject+"','"+siebelObject+"','"+siebelPrimBaseTable+"','"+projectId+"','"+extractionQuery+"',TO_DATE('"+created+"','YYYY-MM-DD'),'"+createdBy+"',TO_DATE('"+lstUpdated+"','YYYY-MM-DD'),'"+lstUpdatedBy+"')";
         
         System.out.println(createObjMapSql);
         
@@ -110,5 +123,39 @@ public class VapObjMappingDAO
             stmt.execute(createObjMapSql);
             stmt.close();
         }
+        
+        return objMapNextVal;
+    }
+    
+    public int searchObjMappinginExistingProject(int existingProjId, String siebObjName, String oscObjName) throws SQLException {
+        int exisProjObjMappingId=0;
+        String searchObjMappingInExistingProject = "SELECT ID ,\n" + 
+        "EXISTING_PROJECT_ID ,\n" + 
+        "SIEBEL_PRNT_TABLE_NAME_CM ,\n" + 
+        "SIEBEL_CHILD_TABLE_NAME_CM ,\n" + 
+        "JOIN_COND_CM ,\n" + 
+        "INCLUDE_FLG_CM ,\n" + 
+        "SERIAL_NUM_CM ,\n" + 
+        "SIEBEL_OBJ_NAME ,\n" + 
+        "OSC_OBJ_NAME ,\n" + 
+        "VAP_PREDEF_OBJ_MAPPING_TYPE ,\n" + 
+        "CREATED ,\n" + 
+        "CREATED_BY ,\n" + 
+        "LST_UPDATED ,\n" + 
+        "LST_UPDATED_BY  FROM VAP_PREDEF_OBJ_MAPPING WHERE SIEBEL_OBJ_NAME = '"+siebObjName+"' AND OSC_OBJ_NAME = '"+oscObjName+"' AND EXISTING_PROJECT_ID='"+existingProjId+"'";
+            
+        if(con != null)
+        {
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(searchObjMappingInExistingProject);
+            while(rs.next())
+            {
+                exisProjObjMappingId = rs.getInt(1);
+                System.out.println("exisProjObjMappingId = "+exisProjObjMappingId);
+            }
+            return exisProjObjMappingId;
+        }
+        
+        return 0;
     }
 }

@@ -11,43 +11,37 @@
        pageContext.setAttribute("projList", projList);
     %>    
     <body>
-    <header>
-    <center>
-        <img id="e" src="resources/images/AppHeader.png" alt="nothing" style="width:40%"/>
-    </center>
-    </header>
-    <br><br>
         <div class="container">
         <div class="row">
         <div class="col-sm-12">
-    
-    
     <form action="projectservlet" method="POST" class="row col-sm-12">
         <input type="submit" name="newProj" value="Create New Project" class="btn btn-primary"/>
     </form>
         
      <br>
-        <table class="table table-hover">
+        <table id="allProjectsTable" class="display" cellspacing="0" width="100%">
+        <thead>
              <tr>
                 <th>
-                    PROJECT_ID
+                    Project ID
                 </th>
                 <th>
-                    PROJECT_NAME
+                    Project Name
                 </th>
                 <th>
-                    SIEBEL_USER_NAME
+                    Siebel User Name
                 </th>
                 <th>
-                    SIEBEL_PASSWORD
+                    Siebel Password
                 </th>
                 <th>
-                    SIEBEL_TOKEN
+                    Siebel Token
                 </th>
                 <th>
-                    SIEBEL_REPO_NAME
+                    Siebel Repository Name
                 </th>
              </tr>
+            </thead>
              <c:forEach items="${projList}" var="row">
               <?audit suppress oracle.ide.xml.validation-error?>
               <tr>
@@ -77,4 +71,10 @@
     </div>
     </body>
     <%@ include file="/footer.jsp" %>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('#allProjectsTable').DataTable();
+    });
+    
+    </script>
 </html>

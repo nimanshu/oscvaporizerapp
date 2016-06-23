@@ -17,9 +17,16 @@ import javax.servlet.http.*;
 
 import com.deloitte.vaporizer.jcs.dao.VapFieldMappingDAO;
 import com.deloitte.vaporizer.jcs.bean.VapObjMapping;
+import com.deloitte.vaporizer.jcs.bean.VapPredefFieldMapping;
 import com.deloitte.vaporizer.jcs.dao.VapObjMappingDAO;
 import com.deloitte.vaporizer.jcs.bean.VapProject;
 import com.deloitte.vaporizer.jcs.dao.VapProjectDAO;
+
+import com.deloitte.vaporizer.jcs.util.GetJNDIConnectionUtil;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class ProjectServlet extends HttpServlet {
     private static final String CONTENT_TYPE = "text/html; charset=windows-1252";
@@ -33,23 +40,24 @@ public class ProjectServlet extends HttpServlet {
         System.out.println("id parameter = "+ request.getParameter("id"));
         if(request.getParameter("id")!= null && Integer.valueOf(request.getParameter("id"))!= 0)
         {
-            HttpSession session = request.getSession(true);
-            String projId = request.getParameter("id");
-            VapObjMappingDAO vObjMapDAO = new VapObjMappingDAO();
-            ArrayList<VapObjMapping> vObjMapList = null;// = new ArrayList<VapObjMapping>();
-            try 
-            {
-                vObjMapList = vObjMapDAO.getProjRelatedObjectMappings(Integer.valueOf(request.getParameter("id")));
-            } 
-            catch (SQLException e) 
-            {
-                e.printStackTrace();
-            }
-            System.out.println("projId = "+projId);
-            session.setAttribute("projId", projId);
-            request.setAttribute("vObjMapList", vObjMapList);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("ObjectMapping.jsp");
-            dispatcher.forward(request, response);
+//            HttpSession session = request.getSession(true);
+//            String projId = request.getParameter("id");
+//            VapObjMappingDAO vObjMapDAO = new VapObjMappingDAO();
+//            ArrayList<VapObjMapping> vObjMapList = null;// = new ArrayList<VapObjMapping>();
+//            try 
+//            {
+//                vObjMapList = vObjMapDAO.getProjRelatedObjectMappings(Integer.valueOf(request.getParameter("id")));
+//            } 
+//            catch (SQLException e) 
+//            {
+//                e.printStackTrace();
+//            }
+//            System.out.println("projId = "+projId);
+//            session.setAttribute("projId", projId);
+//            request.setAttribute("vObjMapList", vObjMapList);
+//            RequestDispatcher dispatcher = request.getRequestDispatcher("ObjectMapping.jsp");
+//            dispatcher.forward(request, response);
+              ProjectServlet.goToObjMappingPage(Integer.valueOf(request.getParameter("id")), request, response);
         }
         
         else if(request.getParameter("objMapId")!= null && Integer.valueOf(request.getParameter("objMapId"))!= 0) 
@@ -122,6 +130,8 @@ public class ProjectServlet extends HttpServlet {
         else if(request.getParameter("createObjMapping") != null)
         {
             HttpSession session = request.getSession(true);
+            String oscObjName = request.getParameter("OSC_OBJECT");
+            String siebObjName = request.getParameter("SIEBEL_OBJECT");
             VapObjMapping vObjMap = new VapObjMapping();
             vObjMap.setCreated(new Date());
             vObjMap.setCreatedBy("NIPAREKH");
@@ -136,14 +146,52 @@ public class ProjectServlet extends HttpServlet {
             VapObjMappingDAO vObjMapDAO = new VapObjMappingDAO();
             try 
             {
-                vObjMapDAO.createObjectMapping(vObjMap);
+                int newObjMapId = vObjMapDAO.createObjectMapping(vObjMap);
+                VapProjectDAO projDao = new VapProjectDAO();
+                int exisProjId = projDao.getExistingProjectId();
+                int exisProjObjMappingId = vObjMapDAO.searchObjMappinginExistingProject(exisProjId, siebObjName, oscObjName);
+                if (exisProjObjMappingId != 0)
+                {
+                    VapFieldMappingDAO fieldMappingDao = new VapFieldMappingDAO();
+                    ArrayList<VapPredefFieldMapping> predefFldMapList = fieldMappingDao.getPreDefObjMapRelatedFieldMappings(exisProjObjMappingId);
+                    if(predefFldMapList.size() > 0) 
+                    {
+                        for(VapPredefFieldMapping v:predefFldMapList) 
+                        {
+                            VapFieldMapping vFieldMap = new VapFieldMapping();
+                            vFieldMap.setCreated(new Date());
+                            vFieldMap.setCreatedBy("NIPAREKH");
+                            vFieldMap.setLstUpdated(new Date());
+                            vFieldMap.setLstUpdatedBy("NIPAREKH");
+                            vFieldMap.setObjMapId(newObjMapId);
+                            vFieldMap.setOscObjName(v.getOscObjectName());
+                            vFieldMap.setOscFieldName(v.getOscObjectFieldName());
+                            vFieldMap.setSiebBaseTableName(v.getSiebBaseTableName());
+                            vFieldMap.setSiebColumnName(v.getSiebBaseTableColumnName());
+                            VapFieldMappingDAO vFieldMapDAO = new VapFieldMappingDAO();
+                            try 
+                            {
+                                vFieldMapDAO.createFieldMapping(vFieldMap);
+                                System.out.println("Field Mapping record saveed - done");
+                            } 
+                            catch (SQLException e) 
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+                System.out.println("Obj Mapping record saveed - done");
+                //ProjectServlet.goToObjMappingPage(newObjMapId, request, response);
+                ProjectServlet.goToObjMappingPage((Integer)session.getAttribute("projId"), request, response);
             } 
             catch (SQLException e) 
             {
                 e.printStackTrace();
             }
-            System.out.println("Obj Mapping record saveed - done");
-            response.sendRedirect("ObjectMapping.jsp");
+            
+                //response.sendRedirect("ObjectMapping.jsp");
+            
 
         }
         
@@ -170,25 +218,9 @@ public class ProjectServlet extends HttpServlet {
             {
                 e.printStackTrace();
             }
+            
             String objMapId = String.valueOf(session.getAttribute("objMapId"));
             ProjectServlet.goToFieldMappingPage(objMapId, request, response);
-            /*System.out.println("objMapId = "+objMapId);
-            session.setAttribute("objMapId", objMapId);
-            ArrayList<VapFieldMapping> vFieldMapList = null;
-            try
-            {
-                vFieldMapList = vFieldMapDAO.getObjMapRelatedFieldMappings(objMapId);    
-            }
-            catch(SQLException e)
-            {
-                e.printStackTrace();    
-            }
-            System.out.println("vFieldMapList = "+vFieldMapList);
-            request.setAttribute("vFieldMapList", vFieldMapList);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("FieldMapping.jsp");
-            dispatcher.forward(request, response);*/
-            //response.sendRedirect("FieldMapping.jsp");
-            
         }
         else
         {
@@ -242,6 +274,25 @@ public class ProjectServlet extends HttpServlet {
         System.out.println("vFieldMapList = "+vFieldMapList);
         request.setAttribute("vFieldMapList", vFieldMapList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("FieldMapping.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    public static void goToObjMappingPage(int projId, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        VapObjMappingDAO vObjMapDAO = new VapObjMappingDAO();
+        ArrayList<VapObjMapping> vObjMapList = null;// = new ArrayList<VapObjMapping>();
+        try 
+        {
+            vObjMapList = vObjMapDAO.getProjRelatedObjectMappings(projId);
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        System.out.println("projId = "+projId);
+        session.setAttribute("projId", projId);
+        request.setAttribute("vObjMapList", vObjMapList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ObjectMapping.jsp");
         dispatcher.forward(request, response);
     }
 }

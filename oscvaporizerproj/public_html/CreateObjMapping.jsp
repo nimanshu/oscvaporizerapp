@@ -4,12 +4,6 @@
     <%@ include file="/header.jsp" %>
     <title>Create Object Mapping</title>
     <body>
-        <header>
-            <center>
-                <img id="e" src="resources/images/AppHeader.png" alt="nothing" style="width:40%"/>
-            </center>
-        </header>
-        <br><br>
         <div class="container">
         <div class="row">
         <div class="col-sm-12">
@@ -18,13 +12,13 @@
     </form>
     <br><br><br><form name="test" action="projectservlet" method="post" data-toggle="validator">
             <div class="form-group row">
-                        <label class="col-sm-4">SEQUENCE: </Label>
+                        <label class="col-sm-4">Sequence: </Label>
                         <div class="col-sm-6">
                             <input id="SEQUENCE_NUM" class="form-control" name="SEQUENCE_NUM" required/>
                         </div>
             </div>
             <div class="form-group row">
-                    <Label class="col-sm-4">SIEBEL_OBJECT: </label>
+                    <Label class="col-sm-4">Siebel Object: </label>
                     <div class="col-sm-6">
                         <div class="input-group">
                             <input id="SIEBEL_OBJECT" name="SIEBEL_OBJECT" class="form-control" required>
@@ -35,14 +29,14 @@
                     </div>
             </div>
             <div class="form-group row">
-                    <Label class="col-sm-4">SIEBEL_PRIM_BASE_TABLE: </label>
+                    <Label class="col-sm-4">Siebel Primary Base Table: </label>
                     <div class="col-sm-6">
-                        <!--<input  id="SIEBEL_PRIM_BASE_TABLE" name="SIEBEL_PRIM_BASE_TABLE"/> -->
-                        <output id="SIEBEL_PRIM_BASE_TABLE" name="SIEBEL_PRIM_BASE_TABLE"></output>
+                        <input  id="SIEBEL_PRIM_BASE_TABLE" name="SIEBEL_PRIM_BASE_TABLE" class="form-control" readonly/> 
+                        <!--<output id="SIEBEL_PRIM_BASE_TABLE" name="SIEBEL_PRIM_BASE_TABLE"></output>-->
                     </div>
             </div>
             <div class="form-group row">
-                    <Label class="col-sm-4">OSC_OBJECT: </label>
+                    <Label class="col-sm-4">OSC Object: </label>
                         <div class="col-sm-6">
                         <div class="input-group">
                             <input id="OSC_OBJECT" name="OSC_OBJECT" class="form-control" required>
@@ -53,13 +47,13 @@
                         </div>
             </div>
             <div class="form-group row">
-                    <Label class="col-sm-4">EXTRACTION_QUERY: </label>
+                    <Label class="col-sm-4">Extraction Query: </label>
                     <div class="col-sm-6">
                         <input  id="EXTRACTION_QUERY" class="form-control"  name="EXTRACTION_QUERY"/>
                     </div>
             </div>
             <div class="form-group row">
-                <button type="submit" name="createObjMapping" value="Submit" class="btn btn-primary pull-right">SUBMIT</button>
+                <button type="submit" name="createObjMapping" value="Submit" class="btn btn-success pull-right">SUBMIT</button>
             </div>
                        
             </form>

@@ -19,4 +19,14 @@
         <link rel="stylesheet" type="text/css" href="resources/css/osc-vaporizerapp.css">
         <link rel="stylesheet" type="text/css" href="resources/DataTables/datatables.min.css"/>
   </head>
+  <div class="container">
+        <div class="row">
+        <div class="col-sm-12">
+        <header>
+            <center>
+                <img id="e" src="resources/images/AppHeader.png" alt="nothing"/>
+            </center>
+        </header>
+        </div>
+      </div>
 </html>

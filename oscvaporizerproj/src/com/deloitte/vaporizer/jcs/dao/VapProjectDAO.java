@@ -81,4 +81,23 @@ public class VapProjectDAO
         
         stmt.close();
     }
+    
+    public int getExistingProjectId() throws SQLException {
+        String sql = "SELECT PROJECT_ID FROM VAP_PROJECT WHERE PROJECT_NAME = 'EXISTING_PROJECT'";
+        Connection con = GetJNDIConnectionUtil.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        if(rs.next()) {
+            int exisProjId = rs.getInt(1);  
+            
+            if(exisProjId != 0)
+                return exisProjId;
+                
+            else
+            return 0;
+        }
+        
+        return 0;
+        
+    }
 }

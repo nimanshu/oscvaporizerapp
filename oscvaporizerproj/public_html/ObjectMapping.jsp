@@ -12,40 +12,36 @@
        pageContext.setAttribute("vObjMapList", vObjMapList);
     %-->    
     <body>
-    <header>
-    <center>
-        <img id="e" src="resources/images/AppHeader.png" alt="nothing" style="width:40%"/>
-    </center>
-    </header>
-    <br><br>
         <div class="container">
-        <div class="row">
-        <div class="col-sm-12">
-    <form action="projectservlet" method="POST" class="row col-sm-12 ">
-        <input type="submit" name="newObjMap" value="Create New Object Mapping"  class="btn btn-primary"/>
-        &nbsp; &nbsp;
-        <input type="submit" name="goHome" value="Home"  class="btn btn-primary"/>
-    </form>
+            <div class="row">
+            <div class="col-sm-12">
+            <form action="projectservlet" method="POST" class="row col-sm-12 ">
+                <input type="submit" name="newObjMap" value="Create New Object Mapping"  class="btn btn-primary"/>
+                &nbsp; &nbsp;
+                <input type="submit" name="goHome" value="Home"  class="btn btn-primary"/>
+            </form>
     <br>    
     
-        <table class="table table-hover">
-             <tr>
-                <th>
-                    SEQUENCE
-                </th>
-                <th>
-                    SIEBEL_OBJECT
-                </th>
-                <th>
-                    SIEBEL_PRIM_BASE_TABLE
-                </th>
-                <th>
-                    OSC_OBJECT
-                </th>
-                <th>
-                    EXTRACTION_QUERY
-                </th>
-             </tr>
+        <table id="allObjMappingsTable" class="display" cellspacing="0" width="100%">
+            <thead>
+                 <tr>
+                    <th>
+                        Sequence
+                    </th>
+                    <th>
+                        Siebel Object
+                    </th>
+                    <th>
+                        Siebel Primary Base Table
+                    </th>
+                    <th>
+                        OSC Object
+                    </th>
+                    <th>
+                        Extraction Query
+                    </th>
+                 </tr>
+            </thead>
              <c:forEach items="${vObjMapList}" var="row">
               <?audit suppress oracle.ide.xml.validation-error?>
               <tr>
@@ -72,4 +68,9 @@
     </div>
     </body>
     <%@ include file="/footer.jsp" %>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('#allObjMappingsTable').DataTable();
+    });
+    </script>
 </html>

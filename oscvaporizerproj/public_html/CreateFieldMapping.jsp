@@ -5,11 +5,6 @@
     <title>Create Field Mappings</title>
     <body>
     
-        <header>
-            <center>
-                <img id="e" src="resources/images/AppHeader.png" alt="nothing" style="width:40%"/>
-            </center>
-        </header>
         <br><br>
         <div class="container">
         <div class="row">

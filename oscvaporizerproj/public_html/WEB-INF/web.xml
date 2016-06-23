@@ -7,7 +7,7 @@
             <servlet-name>testServlet</servlet-name>
             <servlet-class>com.deloitte.vaporizer.jcs.controller.testServlet</servlet-class>
         </servlet>
-   
+    
     <servlet-mapping>
                 <servlet-name>testServlet</servlet-name>
                 <url-pattern>/testservlet</url-pattern>
@@ -39,6 +39,25 @@
         <servlet-mapping>
             <servlet-name>GetOscObjectsList</servlet-name>
             <url-pattern>/getoscobjectslist</url-pattern>
+        </servlet-mapping>
+        
+        
+        <servlet>
+            <servlet-name>CreateAndGetXlsxFile</servlet-name>
+            <servlet-class>com.deloitte.vaporizer.jcs.controller.CreateAndGetXlsxFile</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>CreateAndGetXlsxFile</servlet-name>
+            <url-pattern>/createandgetxlsxfile</url-pattern>
+        </servlet-mapping>
+        
+        <servlet>
+            <servlet-name>TestServlet1</servlet-name>
+            <servlet-class>com.deloitte.vaporizer.test.TestServlet1</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>TestServlet1</servlet-name>
+            <url-pattern>/testservlet1</url-pattern>
         </servlet-mapping>
     <login-config />
 </web-app>
