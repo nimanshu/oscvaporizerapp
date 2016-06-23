@@ -17,7 +17,6 @@
     <form action="projectservlet" method="POST" class="row col-sm-12">
         <input type="submit" name="newProj" value="Create New Project" class="btn btn-primary"/>
     </form>
-        <br></br>
      <br>
         <table id="allProjectsTable" class="display" cellspacing="0" width="100%">
         <thead>
