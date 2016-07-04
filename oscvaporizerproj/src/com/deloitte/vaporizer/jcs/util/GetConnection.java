@@ -15,6 +15,7 @@ final class GetConnection {
   
     //String DATASOURCE_CONTEXT = "javatrial1870db";
     String DATASOURCE_CONTEXT = "javadb";
+    //String DATASOURCE_CONTEXT = "MyJCSDB";
     
     Connection result = null;
     try {
